@@ -6,7 +6,6 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Controller
 @RequestMapping("/customer")
-@SessionScope
 public class CustomerController {
     private static final String VIEW = "customer/customer";
 
