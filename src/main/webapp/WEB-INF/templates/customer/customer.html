@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+</head>
+<body>
+<h1>Customer Info</h1>
+<form method="post" th:object="${cust}">
+    <input type="text" name="firstName" size="50" placeholder="First Name" th:value="*{getFirstName()}" />
+    <br />
+    <input type="text" name="lastName" size="50" placeholder="Last Name" th:value="*{getLastName()}" />
+    <br />
+    <input type="text" name="email" size="50" placeholder="Email Address" th:value="*{getEmail()}" />
+    <hr width="500" align="left" />
+    <input type="submit" name="register" value="Register" />
+    <hr width="500" align="left" />
+</form>
+</body>
+</html>
