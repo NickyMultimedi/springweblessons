@@ -66,10 +66,4 @@ public class CalculatorController {
         model.replace("solution", solution);
         return VIEW;
     }
-
-//    @PostMapping
-//    public ModelAndView handlePostCalc(@RequestParam(value = "number_one", defaultValue = "0") Integer nr1, @RequestParam(value = "number_two", defaultValue = "0") Integer nr2) {
-//        Integer sum = service.sum(nr1, nr2);
-//        return new ModelAndView(VIEW, "number_eq", sum);
-//    }
 }
