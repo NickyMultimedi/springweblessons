@@ -17,6 +17,7 @@ public class BookController {
     private static final String BOOKS_VIEW = "books/booklist";
     private static final String BOOK_VIEW = "books/bookdetail";
 
+
     @Autowired
     private BookRepository repo;
 
@@ -27,7 +28,7 @@ public class BookController {
     }
 
     @GetMapping(params = {"isbn"})
-    public String handleBookDetails(@RequestParam("isbn") String isbn, ModelMap model) {
+    public String handleBookDetails(@RequestParam("isbn") String isbn, ModelMap model) throws WebException {
         Book book = repo.getBook(isbn);
         try {
             if ((book.titel) == null) {
@@ -36,10 +37,11 @@ public class BookController {
         } catch (NullPointerException e) {
             WebException we = new WebException(e);
             model.addAttribute("exc", we);
-            System.out.println(we.print());
             return "exception";
         }
         model.addAttribute("book", book);
         return BOOK_VIEW;
     }
+
+
 }

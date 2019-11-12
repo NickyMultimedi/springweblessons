@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>50X</title>
 </head>
-<body>
+<body th:object="${exc}">
 <h1>Oeps, something went wrong. Go fetch your parents for me, will you!</h1>
 <div style="margin-bottom: 2rem;">
     Don't play with things you dont understand. Send an email to support with the following error code and message.
 </div>
 <div style="margin-bottom: 2rem;">
-    Error Code: <span th:text="${exc.getMessage()}"></span>
+    Error Code: <span th:text="*{getMessage()}"></span>
 </div>
 <div style="margin-bottom: 2rem;">
-    Error Stack: <span th:text="${exc.print()}"></span>
+    Error Stack: <span th:text="*{print()}"></span>
 </div>
 </body>
 </html>
