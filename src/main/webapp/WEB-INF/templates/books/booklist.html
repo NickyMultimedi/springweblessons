@@ -8,7 +8,9 @@
 <h1>Book List</h1>
 <ul>
     <li th:each="book, status : ${books}">
-        <a href="books" th:href="@{books(isbn=${book.isbn})}" th:text="${book.shortRepresentation()}">Some Book</a>
+        <a href="books" th:href="@{books(isbn=${book.isbn})}" th:text="${book.shortRepresentation()}">
+            Some Book
+        </a>
     </li>
 </ul>
 </body>

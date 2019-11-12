@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Registration</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+</head>
+<body>
+
+<h1>Car Registration</h1>
+
+<form method="post" th:object="${vehicule}">
+    <input type="text" placeholder="Brand Here" th:field="*{brand}" th:errorClass="errorField" />
+    <span th:if="${#fields.hasErrors('brand')}" class="errorMessage" th:errors="*{brand}">Invalid Brand</span>
+    <br />
+
+    <input type="text" placeholder="Type Here" th:field="*{type}" th:errorClass="errorField" />
+    <span th:if="${#fields.hasErrors('type')}" class="errorMessage" th:errors="*{type}">Invalid Brand</span>
+    <br />
+
+    <input type="number" placeholder="Year Here" th:field="*{year}" th:errorClass="errorField" />
+    <span th:if="${#fields.hasErrors('year')}" class="errorMessage" th:errors="*{year}">Invalid Brand</span>
+    <br />
+
+    <select th:field="*{fuel}">
+        <option value="-">-- SELECT FUELTYPE --</option>
+        <option th:each="type : ${T(be.multimedi.weblessons.vehicules.FuelType).values()}" th:value="${type}" th:text="${type}"></option>
+    </select>
+    <span th:if="${#fields.hasErrors('fuel')}" class="errorMessage" th:errors="*{fuel}">Invalid Brand</span>
+    <br />
+
+    <input type="number" placeholder="Power (kW)" th:field="*{power}" th:errorClass="errorField" />
+    <span th:if="${#fields.hasErrors('power')}" class="errorMessage" th:errors="*{power}">Invalid Brand</span>
+    <br />
+
+    <span th:each="trans : ${T(be.multimedi.weblessons.vehicules.TransmissionType).values()}">
+        <input type="radio" th:field="*{transmission}" th:value="${trans}" th:text="${trans}" />
+    </span>
+    <span th:if="${#fields.hasErrors('transmission')}" class="errorMessage" th:errors="*{transmission}">Invalid Brand</span>
+    <br />
+
+    <input type="checkbox" th:field="*{towBar}" th:text="TowBar" />
+    <br />
+
+    <div>OPTIONS</div>
+
+    <input type="text" placeholder="Date entry into service (dd/mm/yyyy)" th:field="*{entryIntoService}" th:errorClass="errorField" />
+    <span th:if="${#fields.hasErrors('entryIntoService')}" class="errorMessage" th:errors="*{entryIntoService}">Invalid Brand</span>
+    <br />
+
+    <input type="text" placeholder="Plate (D-XXX-DDD)" th:field="*{plate}" th:errorClass="errorField" />
+    <span th:if="${#fields.hasErrors('plate')}" class="errorMessage" th:errors="*{plate}">Invalid Brand</span>
+    <br />
+
+    <input type="number" placeholder="Price" th:field="*{listPrice}" th:errorClass="errorField" /> euro
+    <span th:if="${#fields.hasErrors('listPrice')}" class="errorMessage" th:errors="*{listPrice}">Invalid Brand</span>
+    <br />
+
+    <input type="submit" value="Register" />
+</form>
+
+</body>
+</html>

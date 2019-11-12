@@ -1,0 +1,12 @@
+.errorMessage {
+    color: red;
+}
+
+.errorField {
+    background-color: red;
+}
+
+input {
+    width: 10rem;
+    height: 2rem;
+}
