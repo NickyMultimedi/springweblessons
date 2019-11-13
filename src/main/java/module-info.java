@@ -12,4 +12,8 @@ open module be.multimedi.weblessons {
     requires java.annotation;
     requires java.validation;
     requires tomcat.embed.core;
+
+    requires spring.boot.starter.security;
+    requires spring.security.core;
+    requires spring.security.config;
 }
