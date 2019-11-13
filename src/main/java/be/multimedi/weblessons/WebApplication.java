@@ -1,5 +1,6 @@
 package be.multimedi.weblessons;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +15,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.sql.DataSource;
+
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebApplication {
+    private static final String USERNAME_QUERY = "select name, passwordbc, enabled from Users where name = ?";
+    private static final String AUTHORITIES_QUERY = "select name, role from Users where name = ?";
+
     public static void main(String[] args) throws Throwable {
         SpringApplication.run(WebApplication.class, args);
     }
@@ -32,22 +38,18 @@ public class WebApplication {
         };
     }
 
+    @Autowired
+    public void configureSecurity(AuthenticationManagerBuilder auth, DataSource ds) throws Exception {
+        auth.jdbcAuthentication()
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .dataSource(ds)
+                .usersByUsernameQuery(USERNAME_QUERY)
+                .authoritiesByUsernameQuery(AUTHORITIES_QUERY);
+    }
+
     @Bean
     public WebSecurityConfigurer<WebSecurity> securityConfigurer() {
         return new WebSecurityConfigurerAdapter() {
-            @Override
-            protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-                auth.inMemoryAuthentication()
-                        .passwordEncoder(new BCryptPasswordEncoder())
-                        .withUser("Nick")
-                        .password("$2a$10$6ijNwwL19abb5t/kD2AqLeMYi8/fNuldNSSrU9h6CLHEhAWW6IB.S")
-                        .roles("ADULT")
-                        .and()
-                        .withUser("Mitch")
-                        .password("$2a$10$6ijNwwL19abb5t/kD2AqLeMYi8/fNuldNSSrU9h6CLHEhAWW6IB.S")
-                        .roles("ANIMAL");
-            }
-
             @Override
             protected void configure(HttpSecurity http) throws Exception {
 //                    http.httpBasic();
